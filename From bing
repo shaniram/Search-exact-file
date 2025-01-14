@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Exact File Search Engine</title>
+
+    <script>
+
+        function performSearch() {
+
+            // Get input values
+
+            const keyword = document.getElementById("query").value.trim();
+
+            const filetype = document.getElementById("filetype").value;
+
+            const site = document.getElementById("site").value.trim();
+
+            // Validate keyword
+
+            if (keyword === "") {
+
+                alert("Please enter a keyword to search.");
+
+                return false;
+
+            }
+
+            // Build the search query
+
+            let searchQuery = `"${keyword}" filetype:${filetype}`;
+
+            if (site) {
+
+                searchQuery += ` site:${site}`;
+
+            }
+
+            // Redirect to Bing with the constructed query
+
+            const bingUrl = `https://www.bing.com/search?q=${encodeURIComponent(searchQuery)}`;
+
+            window.open(bingUrl, "_blank");
+
+            return false;
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <h1>Exact File Search Engine</h1>
+
+    <form onsubmit="return performSearch();">
+
+        <label for="query">Keyword:</label>
+
+        <input type="text" id="query" placeholder="Enter keywords" required>
+
+        <br><br>
+
+        <label for="filetype">File Type:</label>
+
+        <select id="filetype">
+
+            <option value="pdf">PDF</option>
+
+            <option value="docx">DOCX</option>
+
+            <option value="ppt">PPT</option>
+
+            <option value="xls">XLS</option>
+
+            <option value="txt">TXT</option>
+
+        </select>
+
+       
+
+        <button type="submit">Search</button>
+
+    </form>
+
+    <p>Note: This tool redirects to Bing for file searches with precise query customization.</p>
+
+</body>
+
+</html>
